@@ -1,58 +1,64 @@
 import { motion } from 'motion/react';
-import { Brain, Zap, Eye, Lock, Shuffle, Trophy, Search, Filter } from 'lucide-react';
+import { Brain, Zap, Eye, Lock, Shuffle, Trophy, Search, Filter, Triangle } from 'lucide-react';
 
 const games = [
   {
     id: 'arithmetic-entry',
     title: 'Arithmetic Game',
-    description: "Because numbers won't add themselves… unfortunately for you.",
+    description: 'Because apparently, you need practice with basic math',
     icon: Zap,
     color: 'from-pink-500 to-rose-500'
   },
   {
     id: 'pattern-entry',
     title: 'The Pattern Whisperer',
-    description: 'Some patterns whisper… most just laugh at you.',
+    description: 'Find patterns that are totally obvious... to some people',
     icon: Eye,
     color: 'from-cyan-500 to-blue-500'
   },
   {
     id: 'brain-entry',
     title: 'Brain Meltdown',
-    description: "Chaos loves company. Rules? Just a suggestion.",
+    description: "Rules? Where we're going, we don't need consistent rules",
     icon: Brain,
     color: 'from-orange-500 to-red-500'
   },
   {
     id: 'trust-entry',
     title: 'Trust Issue',
-    description: "Lies are everywhere. Can you tell the difference? Spoiler: probably not.",
+    description: "Can you spot a lie? Let's find out how gullible you are",
     icon: Lock,
     color: 'from-green-500 to-emerald-500'
   },
   {
     id: 'symbol-entry',
     title: 'Symbol Swap',
-    description: 'Drag, drop, pray. Math might happen.',
+    description: 'Drag things around until math happens',
     icon: Shuffle,
     color: 'from-purple-500 to-violet-500'
   },
   {
     id: 'detective-entry',
     title: 'Number Detective',
-    description: 'Numbers lie. Patterns cheat. Can you catch them?',
+    description: 'Patterns lie. Numbers deceive. Can you find the truth?',
     icon: Search,
-    color: 'from-red-500 to-blue-600'
+    color: 'from-yellow-500 to-amber-600'
   },
   {
     id: 'onerule-entry',
     title: 'One Rule Too Many',
-    description: 'Three rules, one useless. Can you figure out which without losing your mind?',
+    description: 'Three rules. One is useless. Remove it, then solve.',
     icon: Filter,
+    color: 'from-teal-500 to-cyan-600'
+  },
+  {
+    id: 'brokengeometry-entry',
+    title: 'Broken Geometry',
+    description: 'Shapes lie. Formulas deceive. One rule is always broken.',
+    icon: Triangle,
     color: 'from-indigo-500 to-purple-600'
   }
 ];
-
 
 export function Home({ onSelectGame }) {
   return (
@@ -78,16 +84,12 @@ export function Home({ onSelectGame }) {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
-            whileHover={{ 
-              scale: 1.05, 
-              y: -5,
-              transition: { duration: 0.3, ease: "easeOut" }
-            }}
+            whileHover={{ scale: 1.05, y: -5 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onSelectGame(game.id)}
-            className="relative overflow-hidden rounded-2xl p-6 bg-white/10 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all duration-300 group"
+            className="relative overflow-hidden rounded-2xl p-6 bg-white/10 backdrop-blur-md border border-white/20 hover:border-white/40 transition-all group"
           >
-            <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
+            <div className={`absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-20 transition-opacity`} />
             <div className="relative z-10">
               <game.icon className="w-12 h-12 text-white mb-4 mx-auto" />
               <h3 className="text-xl text-white mb-2">{game.title}</h3>

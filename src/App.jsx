@@ -7,10 +7,10 @@ import { TrustIssue } from './pages/TrustIssue';
 import { SymbolSwap } from './pages/SymbolSwap';
 import { NumberDetective } from './pages/NumberDetective';
 import { OneRuleTooMany } from './pages/OneRuleTooMany';
+import { BrokenGeometry } from './pages/BrokenGeometry';
 import { Leaderboard } from './pages/Leaderboard';
 import { GameEntry } from './pages/GameEntry';
-import { Zap, Eye, Brain, Lock, Shuffle, Search, Filter } from 'lucide-react';
-
+import { Zap, Eye, Brain, Lock, Shuffle, Search, Filter, Triangle } from 'lucide-react';
 
 export default function App() {
   const [currentGame, setCurrentGame] = useState('home');
@@ -146,7 +146,7 @@ export default function App() {
             title="Number Detective"
             description="Patterns lie. Numbers deceive. Can you find the truth?"
             icon={Search}
-            color="from-yellow-500 to-orange-500"
+            color="from-yellow-500 to-amber-600"
             howToPlay={[
               'Analyze the sequence of numbers carefully',
               'Identify which number(s) break the pattern',
@@ -159,8 +159,8 @@ export default function App() {
             onStart={(diff) => handleGameStart('detective', diff)}
           />
         );
-
-        case 'onerule-entry':
+      
+      case 'onerule-entry':
         return (
           <GameEntry
             title="One Rule Too Many"
@@ -180,6 +180,26 @@ export default function App() {
           />
         );
       
+      case 'brokengeometry-entry':
+        return (
+          <GameEntry
+            title="Broken Geometry"
+            description="Shapes lie. Formulas deceive. One rule is always broken."
+            icon={Triangle}
+            color="from-indigo-500 to-purple-600"
+            howToPlay={[
+              'You\'ll see geometric shapes with labeled angles, sides, or areas',
+              'One geometric rule is intentionally broken in each puzzle',
+              'Identify what the correct value should be',
+              'Choose from four possible answers',
+              'Each correct answer gives you points based on difficulty',
+              'Hint reveals which rule is broken (but you should figure it out yourself)'
+            ]}
+            onBack={() => setCurrentGame('home')}
+            onStart={(diff) => handleGameStart('brokengeometry', diff)}
+          />
+        );
+      
       case 'arithmetic':
         return <ArithmeticGame difficulty={difficulty} onBack={() => setCurrentGame('arithmetic-entry')} onComplete={addScore} />;
       case 'pattern':
@@ -192,8 +212,10 @@ export default function App() {
         return <SymbolSwap difficulty={difficulty} onBack={() => setCurrentGame('symbol-entry')} onComplete={addScore} />;
       case 'detective':
         return <NumberDetective difficulty={difficulty} onBack={() => setCurrentGame('detective-entry')} onComplete={addScore} />;
-        case 'onerule':
+      case 'onerule':
         return <OneRuleTooMany difficulty={difficulty} onBack={() => setCurrentGame('onerule-entry')} onComplete={addScore} />;
+      case 'brokengeometry':
+        return <BrokenGeometry difficulty={difficulty} onBack={() => setCurrentGame('brokengeometry-entry')} onComplete={addScore} />;
       case 'leaderboard':
         return <Leaderboard scores={scores} onBack={() => setCurrentGame('home')} />;
       default:
