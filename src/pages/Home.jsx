@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Brain, Zap, Eye, Lock, Shuffle, Trophy, Search, Filter, Triangle } from 'lucide-react';
+import { Brain, Zap, Eye, Lock, Shuffle, Trophy, Search, Filter, Triangle, TrendingUp } from 'lucide-react';
 
 const games = [
   {
@@ -57,6 +57,13 @@ const games = [
     description: 'Shapes lie. Formulas deceive. One rule is always broken.',
     icon: Triangle,
     color: 'from-indigo-500 to-purple-600'
+  },
+  {
+    id: 'calcnia-entry',
+    title: 'Calcnia',
+    description: 'Fast-paced arcade calculus fun with Derivatives, Integrals, and witty challenges!',
+    icon: TrendingUp,
+    color: 'from-pink-500 to-purple-500'
   }
 ];
 

@@ -236,7 +236,7 @@ function generateProblem(difficulty) {
   return problems[Math.floor(Math.random() * problems.length)]();
 }
 
-export function BrokenGeometry({ difficulty, onBack, onComplete }) {
+ function BrokenGeometry({ difficulty, onBack, onComplete }) {
   const [problem, setProblem] = useState(generateProblem(difficulty));
   const [score, setScore] = useState(0);
   const [questionNumber, setQuestionNumber] = useState(1);
@@ -397,7 +397,7 @@ export function BrokenGeometry({ difficulty, onBack, onComplete }) {
               <p className="text-purple-300 mb-2">Problem {questionNumber}</p>
               <div className="flex items-center justify-center gap-2 mb-4">
                 <AlertTriangle className="w-5 h-5 text-yellow-400" />
-                <p className="text-lg text-[#FFFF00] italic">One rule is broken.</p>
+                <p className="text-lg text-yellow-400 italic">One rule is broken.</p>
               </div>
               <h3 className="text-2xl text-white">{problem.shape}</h3>
             </div>
@@ -470,3 +470,5 @@ export function BrokenGeometry({ difficulty, onBack, onComplete }) {
     </div>
   );
 }
+
+export default BrokenGeometry;

@@ -7,7 +7,9 @@ import { TrustIssue } from './pages/TrustIssue';
 import { SymbolSwap } from './pages/SymbolSwap';
 import { NumberDetective } from './pages/NumberDetective';
 import { OneRuleTooMany } from './pages/OneRuleTooMany';
-import { BrokenGeometry } from './pages/BrokenGeometry';
+import BrokenGeometry  from './pages/BrokenGeometry';
+import { Calcnia } from './pages/Calcnia';
+import CalcniaEntry  from './pages/CalcniaEntry';
 import { Leaderboard } from './pages/Leaderboard';
 import { GameEntry } from './pages/GameEntry';
 import { Zap, Eye, Brain, Lock, Shuffle, Search, Filter, Triangle } from 'lucide-react';
@@ -15,6 +17,7 @@ import { Zap, Eye, Brain, Lock, Shuffle, Search, Filter, Triangle } from 'lucide
 export default function App() {
   const [currentGame, setCurrentGame] = useState('home');
   const [difficulty, setDifficulty] = useState('medium');
+  const [questionType, setQuestionType] = useState('derivative');
   const [scores, setScores] = useState(() => {
     const saved = localStorage.getItem('equitia-scores');
     return saved ? JSON.parse(saved) : [];
@@ -34,6 +37,12 @@ export default function App() {
   const handleGameStart = (game, selectedDifficulty) => {
     setDifficulty(selectedDifficulty);
     setCurrentGame(game);
+  };
+
+  const handleCalcniaStart = (selectedType, selectedDifficulty) => {
+    setQuestionType(selectedType);
+    setDifficulty(selectedDifficulty);
+    setCurrentGame('calcnia');
   };
 
   const renderGame = () => {
@@ -200,6 +209,25 @@ export default function App() {
           />
         );
       
+      case 'calcnia-entry':
+        return (
+          <CalcniaEntry
+            title="Calcnia"
+            description="Test your calculus skills with derivatives and integrals"
+            icon={Triangle}
+            color="from-indigo-500 to-purple-600"
+            howToPlay={[
+              'You\'ll see a calculus problem with a question type (derivative or integral)',
+              'Solve the problem and type in the answer',
+              'Each correct answer gives you points based on difficulty',
+              'You have 60 seconds to solve as many as you can',
+              'Hints are available if you\'re struggling'
+            ]}
+            onBack={() => setCurrentGame('home')}
+            onStart={(type, diff) => handleCalcniaStart(type, diff)}
+          />
+        );
+      
       case 'arithmetic':
         return <ArithmeticGame difficulty={difficulty} onBack={() => setCurrentGame('arithmetic-entry')} onComplete={addScore} />;
       case 'pattern':
@@ -216,6 +244,8 @@ export default function App() {
         return <OneRuleTooMany difficulty={difficulty} onBack={() => setCurrentGame('onerule-entry')} onComplete={addScore} />;
       case 'brokengeometry':
         return <BrokenGeometry difficulty={difficulty} onBack={() => setCurrentGame('brokengeometry-entry')} onComplete={addScore} />;
+      case 'calcnia':
+        return <Calcnia difficulty={difficulty} questionType={questionType} onBack={() => setCurrentGame('calcnia-entry')} onComplete={addScore} />;
       case 'leaderboard':
         return <Leaderboard scores={scores} onBack={() => setCurrentGame('home')} />;
       default:
